@@ -20,3 +20,6 @@ https://wpshout.com/unconditionally-refactoring-nested-statements-cleaner-code/
 
 ##7
 https://www.geeksforgeeks.org/php-ctype_space-function/
+
+##8
+https://stackoverflow.com/questions/12914029/how-to-make-ctype-upper-ignore-spaces-on-uppercase-check

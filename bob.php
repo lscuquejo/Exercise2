@@ -14,9 +14,9 @@ class Bob
         return (substr($string, -$len) === $endString);
     }
 
-    private function ignoreSpaces($x)
+    private function ignoreSpaces($frase)
     {
-        str_replace(' ', '', $x);
+        return str_replace(' ', '', $frase);
     }
 
     private function setAnswers()
@@ -58,10 +58,15 @@ class Bob
         /**
          * Respond to aggressive conversations with "!".
          */
-        if ($this->endsWith($conversation, '!') !== false )
+        if ($this->endsWith($this->ignoreSpaces($conversation), '!') !== false )
         {
-            return $this->answers['aggressive'];
+                return $this->answers['aggressive'];
         }
+
+//        if (strrpos($conversation, "?"))
+//        {
+//            return $this->answers['question'];
+//        }
 
         /**
          * Respond to silence.
