@@ -14,6 +14,11 @@ class Bob
         return (substr($string, -$len) === $endString);
     }
 
+    private function ignoreSpaces($x)
+    {
+        str_replace(' ', '', $x);
+    }
+
     private function setAnswers()
     {
         return $this->answers = array(
@@ -45,7 +50,7 @@ class Bob
         /**
          * Respond to aggressive conversations without "!"
          */
-        if (ctype_upper($conversation))
+        if (ctype_upper($this->ignoreSpaces($conversation)))
         {
             return $this->answers['aggressive'];
         }
