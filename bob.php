@@ -29,6 +29,11 @@ class Bob
     {
         $this->setAnswers();
 
+        if ($this->endsWith($conversation, '?') !== false && ctype_upper($conversation))
+        {
+            return $this->answers['aggressiveQuestion'];
+        }
+
         /**
          * Respond to questions.
          */
@@ -51,6 +56,22 @@ class Bob
         if ($this->endsWith($conversation, '!') !== false )
         {
             return $this->answers['aggressive'];
+        }
+
+        /**
+         * Respond to silence.
+         */
+        if (ctype_space($conversation))
+        {
+            return $this->answers['silence'];
+        }
+
+        /**
+         * Respond to empty string.
+         */
+        if (empty($conversation))
+        {
+            return $this->answers['silence'];
         }
 
         /**

@@ -1,15 +1,12 @@
 #Links that I check.
 
 ##1
- 
- https://stackoverflow.com/questions/4211875/check-if-a-string-is-all-caps-in-php
+https://stackoverflow.com/questions/4211875/check-if-a-string-is-all-caps-in-php
 
 ##2
-
 https://php.net/manual/en/function.preg-match.php
 
 ##3
-
 https://www.w3schools.com/php/func_array.asp
 
 ##4
@@ -20,3 +17,6 @@ https://php.net/manual/en/function.preg-match.php
 
 ##6
 https://wpshout.com/unconditionally-refactoring-nested-statements-cleaner-code/
+
+##7
+https://www.geeksforgeeks.org/php-ctype_space-function/
