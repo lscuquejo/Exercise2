@@ -5,6 +5,15 @@ class Bob
 
     private $answers;
 
+//    private $stuff;
+//
+//    private function setStuff()
+//    {
+//        return $this->stuff = array(
+//            "most of cases" =>  ' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',
+//        );
+//    }
+
     private function endsWith($string, $endString)
     {
         $len = strlen($endString);
@@ -14,9 +23,33 @@ class Bob
         return (substr($string, -$len) === $endString);
     }
 
-    private function ignoreSpaces($frase)
+    private function ignoreStuff($phrase)
     {
-        return str_replace(' ', '', $frase);
+        $phrase = str_replace(' ',  '', $phrase);
+
+        $phrase = str_replace('!', '', $phrase);
+
+        $phrase = str_replace(',', '', $phrase);
+
+        $phrase = str_replace(',', '', $phrase);
+
+        $phrase = str_replace('%', '', $phrase);
+
+        $phrase = str_replace('^', '', $phrase);
+
+        $phrase = str_replace('*', '', $phrase);
+
+        $phrase = str_replace('@', '', $phrase);
+
+        $phrase = str_replace('#', '', $phrase);
+
+        $phrase = str_replace('$', '', $phrase);
+
+        $phrase = str_replace('(', '', $phrase);
+
+        $phrase = preg_replace('/[0-9]+/', '', $phrase);
+
+        return $phrase;
     }
 
     private function setAnswers()
@@ -34,34 +67,51 @@ class Bob
     {
         $this->setAnswers();
 
-        if ($this->endsWith($conversation, '?') !== false && ctype_upper($conversation))
+        /**
+         * Respond to aggressiveQuestions.
+         */
+        if ($this->endsWith($this->ignoreStuff($conversation), '?') !== false)
         {
-            return $this->answers['aggressiveQuestion'];
+
+            $conversation = str_replace('?', '', $conversation);
+
+            $conversation = str_replace(' ', '', $conversation);
+
+            if (ctype_upper($conversation))
+            {
+
+                return $this->answers['aggressiveQuestion'];
+
+            } else {
+
+                return $this->answers['question'];
+
+            }
         }
 
-        /**
-         * Respond to questions.
-         */
-        if ($this->endsWith($conversation, '?') !== false )
-        {
-            return $this->answers['question'];
-        }
+//        /**
+//         * Respond to questions.
+//         */
+//        if ($this->endsWith($this->ignoreStuff($conversation), '?') !== false)
+//        {
+//            return $this->answers['question'];
+//        }
 
         /**
          * Respond to aggressive conversations without "!"
          */
-        if (ctype_upper($this->ignoreSpaces($conversation)))
+        if (ctype_upper($this->ignoreStuff($conversation)))
         {
             return $this->answers['aggressive'];
         }
 
-        /**
-         * Respond to aggressive conversations with "!".
-         */
-        if ($this->endsWith($this->ignoreSpaces($conversation), '!') !== false )
-        {
-                return $this->answers['aggressive'];
-        }
+//        /**
+//         * Respond to aggressive conversations with "!".
+//         */
+//        if ($this->endsWith($this->ignoreSpaces($conversation), '!') !== false )
+//        {
+//                return $this->answers['aggressive'];
+//        }
 
 //        if (strrpos($conversation, "?"))
 //        {

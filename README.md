@@ -23,3 +23,9 @@ https://www.geeksforgeeks.org/php-ctype_space-function/
 
 ##8
 https://stackoverflow.com/questions/12914029/how-to-make-ctype-upper-ignore-spaces-on-uppercase-check
+
+##9
+https://stackoverflow.com/questions/7605480/str-replace-for-multiple-items
+
+##10
+https://community.rstudio.com/t/how-to-strip-special-characters-from-a-string/19684
