@@ -5,14 +5,16 @@ class Bob
 
     private $answers;
 
-//    private $stuff;
-//
-//    private function setStuff()
-//    {
-//        return $this->stuff = array(
-//            "most of cases" =>  ' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',
-//        );
-//    }
+    private $stuff;
+
+    private function setStuff()
+    {
+        return $this->stuff = array(
+            "mostOfCases"       =>  ' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',
+            "aggressiveQuestion"=>  ' ', '?',
+            "ignoreNumbers"     =>  '/[0-9]+/',
+        );
+    }
 
     private function endsWith($string, $endString)
     {
@@ -25,29 +27,33 @@ class Bob
 
     private function ignoreStuff($phrase)
     {
-        $phrase = str_replace(' ',  '', $phrase);
+        $phrase = str_replace( $this->stuff["mostOfCases"],  '', $phrase);
 
-        $phrase = str_replace('!', '', $phrase);
+        $phrase = preg_replace($this->stuff["ignoreNumbers"], '', $phrase);
 
-        $phrase = str_replace(',', '', $phrase);
-
-        $phrase = str_replace(',', '', $phrase);
-
-        $phrase = str_replace('%', '', $phrase);
-
-        $phrase = str_replace('^', '', $phrase);
-
-        $phrase = str_replace('*', '', $phrase);
-
-        $phrase = str_replace('@', '', $phrase);
-
-        $phrase = str_replace('#', '', $phrase);
-
-        $phrase = str_replace('$', '', $phrase);
-
-        $phrase = str_replace('(', '', $phrase);
-
-        $phrase = preg_replace('/[0-9]+/', '', $phrase);
+//        $phrase = str_replace(' ',  '', $phrase);
+//
+//        $phrase = str_replace('!', '', $phrase);
+//
+//        $phrase = str_replace(',', '', $phrase);
+//
+//        $phrase = str_replace(',', '', $phrase);
+//
+//        $phrase = str_replace('%', '', $phrase);
+//
+//        $phrase = str_replace('^', '', $phrase);
+//
+//        $phrase = str_replace('*', '', $phrase);
+//
+//        $phrase = str_replace('@', '', $phrase);
+//
+//        $phrase = str_replace('#', '', $phrase);
+//
+//        $phrase = str_replace('$', '', $phrase);
+//
+//        $phrase = str_replace('(', '', $phrase);
+//
+//        $phrase = preg_replace('/[0-9]+/', '', $phrase);
 
         return $phrase;
     }
