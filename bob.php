@@ -5,16 +5,21 @@ class Bob
 
     private $answers;
 
-    private $stuff;
+    private $mostOfCases;
 
-    private function setStuff()
+    private function setMostOfCases()
     {
-        return $this->stuff = array(
-            "mostOfCases"       =>  ' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',
-            "aggressiveQuestion"=>  ' ', '?',
-            "ignoreNumbers"     =>  '/[0-9]+/',
-        );
+        return $this->mostOfCases = array(' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',);
     }
+
+//    private function setStuff()
+//    {
+//        return $this->stuff = array(
+//            "mostOfCases"       =>  ' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',
+//            "aggressiveQuestion"=>  ' ', '?',
+//            "ignoreNumbers"     =>  '/[0-9]+/',
+//        );
+//    }
 
     private function endsWith($string, $endString)
     {
@@ -27,9 +32,13 @@ class Bob
 
     private function ignoreStuff($phrase)
     {
-        $phrase = str_replace( $this->stuff["mostOfCases"],  '', $phrase);
+        $this->setMostOfCases();
 
-        $phrase = preg_replace($this->stuff["ignoreNumbers"], '', $phrase);
+      //  $this->setStuff();
+
+        $phrase = str_replace($this->mostOfCases,  '', $phrase);
+
+        $phrase = preg_replace($this->stuff['ignoreNumbers'], '', $phrase);
 
 //        $phrase = str_replace(' ',  '', $phrase);
 //
