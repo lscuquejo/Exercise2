@@ -2,24 +2,34 @@
 
 class Bob
 {
-
+    /**
+     * private vars.
+     */
     private $answers;
 
     private $mostOfCases;
 
+    private $aggressiveQuestion;
+
+    private $ignoreNumbers;
+
+    /**
+     * arrays setters.
+     */
     private function setMostOfCases()
     {
         return $this->mostOfCases = array(' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',);
     }
 
-//    private function setStuff()
-//    {
-//        return $this->stuff = array(
-//            "mostOfCases"       =>  ' ', '!', ',', '%', '^', '*', '@', '#', '$', '(',
-//            "aggressiveQuestion"=>  ' ', '?',
-//            "ignoreNumbers"     =>  '/[0-9]+/',
-//        );
-//    }
+    private function setAggressiveQuestion()
+    {
+        return $this->aggressiveQuestion = array(' ', '?',);
+    }
+
+    private function setIgnoreNumbers()
+    {
+        return $this->ignoreNumbers = array('/[0-9]+/');
+    }
 
     private function endsWith($string, $endString)
     {
@@ -30,43 +40,23 @@ class Bob
         return (substr($string, -$len) === $endString);
     }
 
+    /**
+     * ignore for most of the cases.
+     */
     private function ignoreStuff($phrase)
     {
         $this->setMostOfCases();
-
-      //  $this->setStuff();
+        $this->setIgnoreNumbers();
 
         $phrase = str_replace($this->mostOfCases,  '', $phrase);
-
-        $phrase = preg_replace($this->stuff['ignoreNumbers'], '', $phrase);
-
-//        $phrase = str_replace(' ',  '', $phrase);
-//
-//        $phrase = str_replace('!', '', $phrase);
-//
-//        $phrase = str_replace(',', '', $phrase);
-//
-//        $phrase = str_replace(',', '', $phrase);
-//
-//        $phrase = str_replace('%', '', $phrase);
-//
-//        $phrase = str_replace('^', '', $phrase);
-//
-//        $phrase = str_replace('*', '', $phrase);
-//
-//        $phrase = str_replace('@', '', $phrase);
-//
-//        $phrase = str_replace('#', '', $phrase);
-//
-//        $phrase = str_replace('$', '', $phrase);
-//
-//        $phrase = str_replace('(', '', $phrase);
-//
-//        $phrase = preg_replace('/[0-9]+/', '', $phrase);
+        $phrase = preg_replace($this->ignoreNumbers, '', $phrase);
 
         return $phrase;
     }
 
+    /**
+     * Set All answers.
+     */
     private function setAnswers()
     {
         return $this->answers = array(
@@ -78,20 +68,23 @@ class Bob
         );
     }
 
+    /**
+     * Respond to all questions.
+     */
     public function respondTo($conversation)
     {
         $this->setAnswers();
 
-        /**
-         * Respond to aggressiveQuestions.
-         */
         if ($this->endsWith($this->ignoreStuff($conversation), '?') !== false)
         {
 
-            $conversation = str_replace('?', '', $conversation);
+            $this->setAggressiveQuestion();
 
-            $conversation = str_replace(' ', '', $conversation);
+            $conversation = str_replace($this->aggressiveQuestion, '', $conversation);
 
+            /**
+             * Respond to aggressiveQuestions or to a question.
+             */
             if (ctype_upper($conversation))
             {
 
@@ -104,14 +97,6 @@ class Bob
             }
         }
 
-//        /**
-//         * Respond to questions.
-//         */
-//        if ($this->endsWith($this->ignoreStuff($conversation), '?') !== false)
-//        {
-//            return $this->answers['question'];
-//        }
-
         /**
          * Respond to aggressive conversations without "!"
          */
@@ -119,19 +104,6 @@ class Bob
         {
             return $this->answers['aggressive'];
         }
-
-//        /**
-//         * Respond to aggressive conversations with "!".
-//         */
-//        if ($this->endsWith($this->ignoreSpaces($conversation), '!') !== false )
-//        {
-//                return $this->answers['aggressive'];
-//        }
-
-//        if (strrpos($conversation, "?"))
-//        {
-//            return $this->answers['question'];
-//        }
 
         /**
          * Respond to silence.
@@ -153,20 +125,5 @@ class Bob
          * Respond to anyThingElse
          */
         return $this->answers['anythingElse'];
-
-//        if (preg_match('/\\\b?\b/', $conversation))
-//        {
-//            return $this->answers['question'];
-//        }
-
-//TODO First attempt just works one test.
-//
-//        if ($conversation === "Tom-ay-to, tom-aaaah-to."){
-//
-//            $response = "Whatever.";
-//
-//            return $response;
-//
-//        }
     }
 }
