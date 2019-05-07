@@ -29,3 +29,7 @@ https://stackoverflow.com/questions/7605480/str-replace-for-multiple-items
 
 ##10
 https://community.rstudio.com/t/how-to-strip-special-characters-from-a-string/19684
+
+##11
+https://www.elated.com/trimming-php-strings/
+
